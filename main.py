@@ -8,6 +8,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 # whitelist пользователей
 ALLOWED_USERS = {
     1718888770,
+    6350032264,
     234335061# твой Telegram ID
 }
 
