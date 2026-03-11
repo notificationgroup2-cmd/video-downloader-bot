@@ -5,7 +5,18 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 
 TOKEN = os.getenv("BOT_TOKEN")
 
+# whitelist пользователей
+ALLOWED_USERS = {
+    1718888770,
+    234335061# твой Telegram ID
+}
+
 async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        user_id = update.message.from_user.id
+
+    if user_id not in ALLOWED_USERS:
+        await update.message.reply_text("⛔ У тебя нет доступа к этому боту")
+        return
     url = update.message.text
 
     await update.message.reply_text("Скачиваю видео...")
