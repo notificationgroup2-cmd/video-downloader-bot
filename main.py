@@ -13,7 +13,7 @@ ALLOWED_USERS = {
 }
 
 async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
-        user_id = update.message.from_user.id
+    user_id = update.message.from_user.id
 
     if user_id not in ALLOWED_USERS:
         await update.message.reply_text("⛔ У тебя нет доступа к этому боту")
