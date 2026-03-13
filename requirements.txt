@@ -1,6 +1,6 @@
 python-telegram-bot
 yt-dlp
-requests
 shazamio
-pydub
 ffmpeg-python
+pydub
+requests
