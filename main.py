@@ -47,14 +47,16 @@ async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
         .run()
     )
 
-    # ищем музыку
+    # определяем музыку
     result = await recognize_music("audio.mp3")
 
     await update.message.reply_text(result)
 
+    # отправляем mp3
+    await update.message.reply_audio(audio=open("audio.mp3", "rb"))
+
     os.remove("video.mp4")
     os.remove("audio.mp3")
-
 
 # -------- РАСПОЗНАВАНИЕ МУЗЫКИ --------
 
