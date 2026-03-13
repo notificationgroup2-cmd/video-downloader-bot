@@ -22,12 +22,12 @@ async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.from_user.id
 
     if user_id not in ALLOWED_USERS:
-        await update.message.reply_text("⛔ У тебя нет доступа к этому боту")
+        await update.message.reply_text("⛔ У тебя нет доступа")
         return
 
     url = update.message.text
 
-    await update.message.reply_text("Скачиваю видео...")
+    await update.message.reply_text("📥 Скачиваю видео...")
 
     ydl_opts = {
         "outtmpl": "video.mp4",
@@ -39,7 +39,21 @@ async def download(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_video(video=open("video.mp4", "rb"))
 
+    # извлекаем аудио
+    (
+        ffmpeg
+        .input("video.mp4")
+        .output("audio.mp3")
+        .run()
+    )
+
+    # ищем музыку
+    result = await recognize_music("audio.mp3")
+
+    await update.message.reply_text(result)
+
     os.remove("video.mp4")
+    os.remove("audio.mp3")
 
 
 # -------- РАСПОЗНАВАНИЕ МУЗЫКИ --------
